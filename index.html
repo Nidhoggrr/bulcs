@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+<meta http-equiv="expires" content="0" />
+<meta name="altersfreigabe" content="ab18" />
+<title>bulcs</title>
+<link rel="stylesheet" type="text/css" href="css/default.css" media="screen" />
+<script type="text/javascript" src="lights/js/jquery.js">
+</script>
+<script type="text/javascript" src="lights/js/sound.js">
+</script>
+<script type="text/javascript" src="lights/js/buttons.js">
+</script>
+<script type="text/javascript" src="lights/js/switch.js">
+</script>
+<script type="text/javascript" src="lights/js/mouse.js">
+</script>
+<script type="text/javascript" src="lights/js/json_parse.js">
+</script>
+</head>
+<body>
+<div style="height: 10%;width: 100%;">
+<div id="DivHeadleft" style="position: absolute;left: 10px;">
+<img id="ImgHeadleft" src="lights/images/png/headLCARSleft.png">
+<text id="TextHead" style="position: relative; right: 360px; width: 10%; bottom: 5px;">BULCS</text>
+</div>
+<div id="DivHeadmiddle" style="position: absolute;left: 470px;">
+<img id="ImgHeadmiddle" width=500 height=38 src="lights/images/png/headLCARSmiddle.png">
+</div>
+<div id="DivHeadright" style="position: absolute;left: 1em;">
+<img id="ImgHeadright" src="lights/images/png/headLCARSright.png">
+</div>
+<div id="DivLeft" style="position: fixed;left: 10px;top: 185px;">
+<img id="ImgLeft" width=199 height=100 src="lights/images/png/leftLCARS.png">
+</div>
+<div id="DivBottom" style="position: fixed;left: 10px;bottom: 10px;">
+<img id="ImgBottom" src="lights/images/png/bottomLCARS.png">
+</div>
+</div>
+<div class="pback" id="lightswitch"><script type="text/javascript">
+//<![CDATA[
+		document.title = "bulcs - "+location.hostname;
+		document.getElementById('ImgHeadleft').width=Math.floor(0.30*screen.availWidth);
+		document.getElementById('TextHead').style.fontSize=Math.floor(0.02*screen.availWidth)+"px";
+		document.getElementById('TextHead').style.right=Math.floor((0.53*screen.availWidth*199/450))+"px";
+		document.getElementById('ImgHeadmiddle').width=Math.floor(0.6*screen.availWidth);
+		document.getElementById('ImgHeadmiddle').height=Math.floor(0.30*screen.availWidth*38/450);
+		document.getElementById('DivHeadmiddle').style.left=Math.floor(15+0.30*screen.availWidth)+"px";
+		document.getElementById('ImgHeadright').height=Math.floor(0.30*screen.availWidth*38/450);
+		document.getElementById('DivHeadright').style.left=Math.floor((20+0.90*screen.availWidth))+"px";
+		document.getElementById('DivLeft').style.top=Math.floor(0.32*screen.availWidth*175/450)+"px";
+		document.getElementById('ImgLeft').height=Math.floor(0.45*screen.availHeight);
+		document.getElementById('ImgLeft').width=Math.floor(0.30*screen.availWidth*199/450);
+		document.getElementById('ImgBottom').width=Math.floor(0.30*screen.availWidth);
+		document.getElementById('lightswitch').style.left=Math.floor((0.30*screen.availWidth*199/450)+100)+"px";
+		document.getElementById('lightswitch').style.top=Math.floor((0.10*screen.availWidth*38/450))+"px";
+                var xmlHttp = null;
+                if (typeof XMLHttpRequest != 'undefined') {
+                        xmlHttp = new XMLHttpRequest();
+                }
+                if (!xmlHttp) {
+                        alert('No Ajax support');
+                        throw Exception('No Ajax support');
+                }
+                xmlHttp.open("GET", "lights/cgi-bin/states.lua?date=" + new Date().getTime(), true);
+                xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4 ){
+                        if (xmlHttp.status==200){
+                                var result = json_parse( xmlHttp.responseText );
+                                for (var i = 0; i < result.length; i++) {
+                                        createButton(result[i],result.length);
+                                }
+				document.getElementById('lightswitch').style.width = Math.floor(0.7*screenHeight*784/(138*result.length))+"px";
+                                
+                                //console.log("responseText: "+xmlHttp.responseText);
+                                //console.log("result: "+result);
+                        } else {
+                                console.log("URL: lights/cgi-bin/states.lua?adress="+adress);
+                                console.log("Status: "+xmlHttp.statusText);
+                        }
+                }
+                }
+                xmlHttp.send();
+//]]>
+</script></div>
+</body>
+</html>

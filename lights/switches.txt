@@ -1,0 +1,61 @@
+return {
+-- Table: {1}
+{
+   {2},
+   {3},
+   {4},
+   {5},
+   {6},
+   {7},
+   {8},
+   {9},
+},
+-- Table: {2}
+{
+   ["adress"]="00",
+   ["name"]="FNORDLICHT",
+   ["state"]="0",
+},
+-- Table: {3}
+{
+   ["adress"]="02",
+   ["name"]="MONITOR",
+   ["state"]="0",
+},
+-- Table: {4}
+{
+   ["adress"]="03",
+   ["name"]="CEILING",
+   ["state"]="0",
+},
+-- Table: {5}
+{
+   ["adress"]="04",
+   ["name"]="BALCONY",
+   ["state"]="0",
+},
+-- Table: {6}
+{
+   ["adress"]="05",
+   ["name"]="IKEA LAMP",
+   ["state"]="0",
+},
+-- Table: {7}
+{
+   ["adress"]="06",
+   ["name"]="SOME PLUG",
+   ["state"]="0",
+},
+-- Table: {8}
+{
+   ["adress"]="01",
+   ["name"]="XMAS STAR",
+   ["state"]="0",
+},
+-- Table: {9}
+{
+   ["adress"]="07",
+   ["name"]="COFFEE",
+   ["state"]="0",
+},
+}
