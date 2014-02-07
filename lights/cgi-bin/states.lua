@@ -60,11 +60,21 @@ else
 		for k,v in pairs(switches) do 
 			if (adress==v.adress) then
 				v.state=state
+				if (v.module=="rfmsend") then
+					if (state=="1") then
+						os.execute("sudo " .. localpath .. "modules/rfmsend/rfmsend -a " .. adress .. " -s " .. v.oncommand)
+					elseif (state=="0") then 
+						os.execute("sudo " .. localpath .. "modules/rfmsend/rfmsend -a " .. adress .. " -s " .. v.offcommand)
+					end
+				else
+						os.execute("echo " .. adress .. " -s " .. v.offcommand .."> /tmp/test.tst")
+						 CGI:print()(adress .. " -s " .. v.offcommand)
+				end
 			end
 		end
 		--requestURL = "http://" .. ethersex .. "/ecmd?fs20%20send%200xCCCC%200x" .. adress .. "%200x" .. state .. "0"
 		--request(requestURL)
-		os.execute("sudo " .. localpath .. "modules/rfmsend/rfmsend -a " .. adress .. " -s " .. state .. "0")
+		--os.execute("sudo " .. localpath .. "modules/rfmsend/rfmsend -a " .. adress .. " -s " .. state .. "0")
 		table.save( switches, "/tmp/switches.txt" )
 	end
 	local json = require ("dkjson")

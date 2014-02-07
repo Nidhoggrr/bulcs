@@ -1,15 +1,19 @@
-###VISUDO###
+VISUDO
+======
 add:
 
 http ALL=(ALL) NOPASSWD: /srv/www/lights/modules/rfmsend/rfmsend
 
 to /etc/sudoers
 
-###NGINX EXAMPLE###
+NGINX EXAMPLE
+=============
 nginx.conf
 
-###CONFIG###
+CONFIG
+======
 lights/cgi-bin/states.lua
 
-###BUTTONCONFIG###
+BUTTONCONFIG
+============
 edit lights/genswitches.lua and execute

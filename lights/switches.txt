@@ -12,50 +12,74 @@ return {
 },
 -- Table: {2}
 {
-   ["adress"]="00",
-   ["name"]="FNORDLICHT",
    ["state"]="0",
+   ["name"]="FNORDLICHT",
+   ["adress"]="00",
+   ["module"]="rfmsend",
+   ["offcommand"]="00",
+   ["oncommand"]="10",
 },
 -- Table: {3}
 {
-   ["adress"]="02",
-   ["name"]="MONITOR",
    ["state"]="0",
+   ["name"]="MONITOR",
+   ["adress"]="02",
+   ["module"]="rfmsend",
+   ["offcommand"]="00",
+   ["oncommand"]="10",
 },
 -- Table: {4}
 {
-   ["adress"]="03",
-   ["name"]="CEILING",
    ["state"]="0",
+   ["name"]="CEILING",
+   ["adress"]="03",
+   ["module"]="rfmsend",
+   ["offcommand"]="12",
+   ["oncommand"]="12",
 },
 -- Table: {5}
 {
-   ["adress"]="04",
-   ["name"]="BALCONY",
    ["state"]="0",
+   ["name"]="BALCONY",
+   ["adress"]="04",
+   ["module"]="rfmsend",
+   ["offcommand"]="00",
+   ["oncommand"]="10",
 },
 -- Table: {6}
 {
-   ["adress"]="05",
-   ["name"]="IKEA LAMP",
    ["state"]="0",
+   ["name"]="IKEA LAMP",
+   ["adress"]="05",
+   ["module"]="rfmsend",
+   ["offcommand"]="00",
+   ["oncommand"]="10",
 },
 -- Table: {7}
 {
-   ["adress"]="06",
-   ["name"]="SOME PLUG",
    ["state"]="0",
+   ["name"]="SOME PLUG",
+   ["adress"]="06",
+   ["module"]="rfmsend",
+   ["offcommand"]="00",
+   ["oncommand"]="10",
 },
 -- Table: {8}
 {
-   ["adress"]="01",
-   ["name"]="XMAS STAR",
    ["state"]="0",
+   ["name"]="XMAS STAR",
+   ["adress"]="01",
+   ["module"]="test",
+   ["offcommand"]="00",
+   ["oncommand"]="10",
 },
 -- Table: {9}
 {
-   ["adress"]="07",
-   ["name"]="COFFEE",
    ["state"]="0",
+   ["name"]="COFFEE",
+   ["adress"]="07",
+   ["module"]="rfmsend",
+   ["offcommand"]="00",
+   ["oncommand"]="10",
 },
 }
