@@ -62,13 +62,24 @@ else
 				v.state=state
 				if (v.module=="rfmsend") then
 					if (state=="1") then
-						os.execute("sudo " .. localpath .. "modules/rfmsend/rfmsend -a " .. adress .. " -s " .. v.oncommand)
+						os.execute("sudo nice -20 " .. localpath .. "modules/rfmsend/rfmsend -a " .. adress .. " -s " .. v.oncommand)
 					elseif (state=="0") then 
-						os.execute("sudo " .. localpath .. "modules/rfmsend/rfmsend -a " .. adress .. " -s " .. v.offcommand)
+						os.execute("sudo nice -20 " .. localpath .. "modules/rfmsend/rfmsend -a " .. adress .. " -s " .. v.offcommand)
+					end
+				elseif (v.module=="cmd") then
+					if (state=="1") then
+						os.execute(v.oncommand)
+					elseif (state=="0") then 
+						os.execute(v.offcommand)
+					end
+				elseif (v.module=="cluster") then
+					if (state=="1") then
+						--TODO
+					elseif (state=="0") then 
+						--TODO
 					end
 				else
-						os.execute("echo " .. adress .. " -s " .. v.offcommand .."> /tmp/test.tst")
-						 CGI:print()(adress .. " -s " .. v.offcommand)
+					os.execute("echo " .. adress .. " -s " .. v.offcommand .."> /tmp/test.tst")
 				end
 			end
 		end
