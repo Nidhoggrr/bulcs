@@ -72,7 +72,6 @@ int interrupts(int flag)
 int setup()
   {
   int memfd;
-  unsigned int timend;
   void *timer_map,*int_map;
 
   memfd = open("/dev/mem",O_RDWR|O_SYNC);
@@ -110,7 +109,7 @@ int setup()
 static void
 send_bits(uint16_t data, uint8_t bits)
 {
-  unsigned int timend;
+  unsigned int timend1,timend0;
   if (bits == 8)
   {
     ++bits;
@@ -128,21 +127,22 @@ send_bits(uint16_t data, uint8_t bits)
      */
     uint16_t width = data & mask ? 600 : 400;
     digitalWrite (0, 1) ;
-//    delayMicroseconds(width + 150) ;
-    timend = *timer + width + 100;
-    while( (((*timer)-timend) & 0x80000000) != 0);
+    timend1 = *timer + width;
+    timend0 = timend1 + width;
+    while( (((*timer)-timend1) & 0x80000000) != 0);
     digitalWrite (0, 0) ;
-    timend = *timer + width - 100 ;
-    while( (((*timer)-timend) & 0x80000000) != 0);
-//   delayMicroseconds(width - 200) ;
+    while( (((*timer)-timend0) & 0x80000000) != 0);
+    //printf ("Timeend1 %8u, Timeend0 %8u \n", timend1, timend0) ;
   }
 }
+
 
 static void
 fs20_send_internal(uint16_t house, uint8_t addr, uint8_t cmd,
                    uint8_t data)
 {
-  for (uint8_t i = 3; i; i--)
+//i=3 is standard
+  for (uint8_t i = 8; i; i--)
   {
     interrupts(0);
     uint8_t sum = 0x06;
@@ -181,8 +181,10 @@ int main ( int argc, char *argv[] )
   int opt;
   uint8_t adress;
   uint8_t state;
+  uint8_t quiet;
+  quiet = 1;
 
-  while ((opt = getopt(argc, argv, "a:s:")) != -1) {
+  while ((opt = getopt(argc, argv, "a:s:q")) != -1) {
 	switch (opt) {
 		case 'a':
 			adress = atoi(optarg);
@@ -190,18 +192,21 @@ int main ( int argc, char *argv[] )
 		case 's':
 			state = atoi(optarg);
 			break;
+		case 'q':
+			quiet = 0;
+			break;
 		default: /* '?' */
-			fprintf(stderr, "Usage: %s -a adress -s state\n",
+			fprintf(stderr, "Usage: %s -a adress -s state [-q]\n",
 				argv[0]);
 			exit(EXIT_FAILURE);
 	}
   }
 
   //printf ("Raspberry Pi sends rfm12 adress %8u, state %8u\n", adress, state) ;
-  printf ("Raspberry Pi sends rfm12 adress %8u, state %8u \n", adress, state) ;
+  if (quiet) printf ("Raspberry Pi sends rfm12 adress %8u, state %8u \n", adress, state) ;
   setup();
   fs20_send_internal(0xCCCC, adress, state, 0x00);
-  //fs20_send_internal(0xCCCC, 0x01, 0x10 , 0x00);
+  //fs20_send_internal(0xCCCC, adress, 0x10 , 0x00);
   return 0 ;
 }
 
